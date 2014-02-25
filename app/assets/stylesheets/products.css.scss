@@ -1,3 +1,13 @@
 // Place all the styles related to the Products controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.properties {
+  span { display: inline-block; }
+  .property {
+    margin-right: 2px;
+    border: 1px solid gray;
+    .key, .val { padding: 0 2px; }
+    .key { background: lightgray; }
+  }
+}
