@@ -15,9 +15,28 @@
     <%= f.label :title %><br>
     <%= f.text_field :title %>
   </div>
-  <div class="field">
-    <%= f.label :properties %><br>
-    <%= f.text_field :properties %>
+  <div class="field properties-editor" data-template="product[properties][__name__]">
+    <%= f.label :properties %>
+    <table>
+      <thead>
+        <tr>
+          <th>Propriété</th>
+          <th>Valeur</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= f.fields_for :properties do |p| %>
+          <% (@product.properties || {}).each do |key, val| %>
+            <tr class="property">
+              <td><%= text_field_tag nil, nil, value: key, class: 'property-name' %></td>
+              <td><%= p.text_field key, value: val %></td>
+              <td><a href="#" class="remove-property">Remove</a></td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+    <a href="#" class="add-property">New property</a>
   </div>
   <div class="actions">
     <%= f.submit %>
