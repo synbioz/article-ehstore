@@ -1,6 +1,6 @@
 ## Installation
 
-Les instructions d'installation son pour une machine basée sur Debian.
+Les instructions d'installation sont pour une machine basée sur Debian.
 
 ### ElasticSearch
 
