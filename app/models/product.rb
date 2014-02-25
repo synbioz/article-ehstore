@@ -31,7 +31,7 @@ class Product < ActiveRecord::Base
           Product.search({
             query: {
               bool: {
-                should: queries
+                must: queries
               }
             }
           })
