@@ -5,8 +5,23 @@ class Product < ActiveRecord::Base
   class SearchService
     attr_reader :query
 
-    def initialize(query)
+    def initialize(query=nil)
       @query = query
+    end
+
+    def autocomplete(facet, term)
+      return [] unless property_keys.include?(facet)
+
+      field = "properties.#{facet}"
+      response = Product.search({
+        _source: field,
+        query: {
+          prefix: {
+            field => term
+          }
+        }
+      })
+      response.results.map{ |r| r.properties[facet] }
     end
 
     def search

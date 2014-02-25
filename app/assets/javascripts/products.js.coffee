@@ -39,25 +39,44 @@ class PropertiesEditor
         find('input[name]').
         prop('name', name)
 
-class PropertiesSelector extends PropertiesEditor
-  constructor: ->
-    super
-    @propertyTemplate = @$list.find('.property')[0].outerHTML
-
-  _bindAdd: ->
-    self = this
-    @$el.on 'click', '.add-property', ->
-      $template = $(self.propertyTemplate)
-      $template.find('input').val('')
-      self.$list.append($template)
-      false
-
-
 $(document).on 'page:change', ->
   $editors = $('.properties-editor')
   if $editors.length
     $editors.each -> new PropertiesEditor($(this))
 
-  $selectors = $('.properties-selector')
-  if $selectors.length
-    $selectors.each -> new PropertiesSelector($(this))
+  $search = $('.visual-search')
+  if $search.length
+    autocompleteUrl = $search.data('autocomplete-url')
+    searchUrl       = $search.data('search-url')
+    facets          = $search.data('facets').split(',')
+
+    visualSearch = VS.init
+      container: $('.visual-search')
+      query:     ''
+      callbacks:
+        facetMatches: (callback) ->
+          callback(facets)
+
+        valueMatches: (facet, searchTerm, callback) ->
+          $.ajax
+            type: 'GET'
+            url: autocompleteUrl
+            data:
+              facet: facet
+              term: searchTerm
+          .done (data) ->
+            callback(data)
+
+        search: (query, searchCollection) ->
+          q = {}
+          for facet in searchCollection.facets()
+            for own key, val of facet
+              q[key] = val
+
+          $.ajax
+            type: 'GET'
+            url: searchUrl
+            data:
+              q: q
+          .done (data) ->
+            $('#products').replaceWith(data)

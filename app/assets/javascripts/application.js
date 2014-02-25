@@ -10,7 +10,14 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
+// The following require embeds:
+// - jQuery 1.11.0
+// - jQueryUI (Core, Position, Widget, Menu, Autocomplete) 1.10.4
+// - Underscore 1.5.2
+// - Backbone 1.1.0
+//= require visualsearch/dependencies
 //= require jquery_ujs
 //= require turbolinks
+//= require visualsearch/visualsearch
+//
 //= require_tree .

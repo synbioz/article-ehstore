@@ -4,14 +4,29 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    term = params[:q].presence
-    @search_service = Product::SearchService.new(term)
-    @products =
-      if term
-        @search_service.search.all
-      else
-        Product.all
-      end
+    @search_service = Product::SearchService.new
+    @products = Product.all
+  end
+
+  # GET /products/autocomplete (json)
+  def autocomplete
+    respond_to do |format|
+      format.json { render json: Product::SearchService.new.autocomplete(params[:facet], params[:term]) }
+    end
+  end
+
+  # GET /products/search (partial)
+  def search
+    if query = params[:q].presence
+      @search_service = Product::SearchService.new(query)
+      @products = @search_service.search.all
+    else
+      @products = Product.all
+    end
+
+    respond_to do |format|
+      format.html { render partial: 'products_list' }
+    end
   end
 
   # GET /products/1
