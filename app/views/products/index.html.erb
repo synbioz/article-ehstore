@@ -1,14 +1,6 @@
 <h1>Listing products</h1>
 
-<%= form_tag(nil, method: 'get') do %>
-  <div class="field">
-    <%= label_tag :term, 'Search for' %><br>
-    <%= text_field_tag :term, params[:term] %>
-  </div>
-  <div class="actions">
-    <%= submit_tag 'Search', name: nil %>
-  </div>
-<% end %>
+<%= render partial: 'search_form' %>
 
 <table>
   <thead>

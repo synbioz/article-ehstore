@@ -4,7 +4,6 @@
 
 class PropertiesEditor
   constructor: (@$el) ->
-    @$el.data('peditor', this)
     @$list = @$el.find('table tbody').first()
     @template = @$el.data('template')
 
@@ -18,7 +17,7 @@ class PropertiesEditor
       false
 
   _bindAdd: ->
-    $list = @$list
+    self = this
     @$el.on 'click', '.add-property', ->
       buffer =
         """
@@ -28,19 +27,37 @@ class PropertiesEditor
           <td><a href="#" class="remove-property">Remove</a></td>
         </tr>
         """
-      $list.append(buffer)
+      self.$list.append(buffer)
       false
 
   _bindUpdate: ->
-    template = @template
-    @$el.on 'change', 'input.property-name', ->
+    self = this
+    @$el.on 'change', '.property-name', ->
       $i = $(this)
-      name = template.replace('__name__', $i.val())
+      name = self.template.replace('__name__', $i.val())
       $i.closest('.property').
         find('input[name]').
         prop('name', name)
+
+class PropertiesSelector extends PropertiesEditor
+  constructor: ->
+    super
+    @propertyTemplate = @$list.find('.property')[0].outerHTML
+
+  _bindAdd: ->
+    self = this
+    @$el.on 'click', '.add-property', ->
+      $template = $(self.propertyTemplate)
+      $template.find('input').val('')
+      self.$list.append($template)
+      false
+
 
 $(document).on 'page:change', ->
   $editors = $('.properties-editor')
   if $editors.length
     $editors.each -> new PropertiesEditor($(this))
+
+  $selectors = $('.properties-selector')
+  if $selectors.length
+    $selectors.each -> new PropertiesSelector($(this))

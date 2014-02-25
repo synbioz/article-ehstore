@@ -4,10 +4,11 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
+    term = params[:q].presence
+    @search_service = Product::SearchService.new(term)
     @products =
-      if (term = params[:term]) && term.present?
-        search_response = Product.search(term)
-        search_response.records.all
+      if term
+        @search_service.search.all
       else
         Product.all
       end

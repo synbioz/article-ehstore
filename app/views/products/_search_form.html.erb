@@ -1,0 +1,26 @@
+<%= form_tag(nil, method: 'get', class: 'properties-selector', :'data-template' => 'q[__name__]' ) do %>
+  <table>
+    <thead>
+      <tr>
+        <th>Propriété</th>
+        <th>Valeur</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= fields_for :q do |p| %>
+        <% (@search_service.query || {'' => ''}).each do |key, val| %>
+          <tr class="property">
+            <td><%= select_tag nil, options_for_select(@search_service.property_keys, key), include_blank: true, class: 'property-name' %></td>
+            <td><%= p.text_field key, value: val %></td>
+            <td><a href="#" class="remove-property">Remove</a></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+  <a href="#" class="add-property">New filter</a>
+
+  <div class="actions">
+    <%= submit_tag 'Search', name: nil %>
+  </div>
+<% end %>
