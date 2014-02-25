@@ -1,3 +1,4 @@
 class Product < ActiveRecord::Base
-  serialize :properties, ActiveRecord::Coders::Hstore
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
 end
