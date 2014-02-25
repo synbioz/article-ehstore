@@ -40,7 +40,7 @@ class Product < ActiveRecord::Base
 
     def queries
       @query.each_with_object([]) do |(key, value), search|
-        search << { match: { key => value } }
+        search << { match: { "properties.#{key}" => value } }
       end
     end
   end
