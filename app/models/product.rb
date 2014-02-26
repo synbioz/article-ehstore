@@ -36,6 +36,7 @@ class Product < ActiveRecord::Base
         case @query
         when Hash
           Product.search({
+            size: 1000,
             query: {
               bool: {
                 must: queries
