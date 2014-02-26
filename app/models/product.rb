@@ -14,14 +14,21 @@ class Product < ActiveRecord::Base
 
       field = "properties.#{facet}"
       response = Product.search({
-        _source: field,
+        size: 0,
         query: {
           prefix: {
             field => term
           }
+        },
+        facets: {
+          facet => {
+            terms: {
+              field: field
+            }
+          }
         }
       })
-      response.results.map{ |r| r.properties[facet] }
+      response.response["facets"][facet]["terms"].sort_by{ |f| f['count'] }.map{ |f| f['term']}
     end
 
     def search
