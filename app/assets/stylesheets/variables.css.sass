@@ -1,0 +1,34 @@
+$orange: #ff8500
+.button, a.button
+  display: inline-block
+  font-size: 1em
+  cursor: pointer
+  padding: 0.5em 1em
+  border: 1px solid #bbb
+  border-radius: 3px
+  background: #eee
+  color: #333
+  text-decoration: none
+  webkit-appearance: none
+  moz-appearance: none
+  outline: none
+  &:hover
+    background: #fff
+    color: #333
+  &:active
+    background: #ddd
+    color: #333
+.button-primary, a.button-primary
+  background: $orange
+  color: #fff
+  border: 1px solid darken($orange,10)
+  text-shadow: 0 -1px 1px  darken($orange,10)
+  &:hover
+    color: #fff
+    background: lighten($orange,5)
+  &:active
+    color: #fff
+    background: darken($orange,5)
+  &:visited
+    color: #fff
+    

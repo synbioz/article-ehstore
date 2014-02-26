@@ -2,5 +2,7 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @product %> |
-<%= link_to 'Back', products_path %>
+<div class="actions">
+  <%= link_to 'Back', products_path, class: 'button' %>
+  <%= link_to 'Show', @product , class: 'button'%>
+</div>

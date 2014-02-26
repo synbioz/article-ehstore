@@ -12,12 +12,12 @@
   <% end %>
 
   <div class="field">
-    <%#= f.label :title %>
+    <%= f.label :title %>
     <%= f.text_field :title, placeholder: 'Title'%>
   </div>
   <div class="field properties-editor" data-template="product[properties][__name__]">
     <%#= f.label :properties %>
-    <table>
+    <table class="styled-table">
       <thead>
         <tr>
           <th>Property</th>

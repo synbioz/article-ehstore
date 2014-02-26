@@ -9,6 +9,9 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require visualsearch/visualsearch-datauri
+ *
+ *= require variables
+ *= require scaffolds
+ *= require products
  *= require_self
- *= require_tree .
  */

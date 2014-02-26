@@ -1,14 +1,18 @@
-<p id="notice"><%= notice %></p>
+<div class="show_product">
+  <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @product.title %>
-</p>
+<!--   <p>
+    <strong>Title:</strong>
+    <%= @product.title %>
+  </p> -->
+  <h1><%= @product.title %></h1>
 
-<p>
-  <strong>Properties:</strong>
-  <%= show_properties(@product.properties) %>
-</p>
-
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', products_path %>
+  <p>
+    <strong>Properties:</strong>
+    <%= show_properties(@product.properties) %>
+  </p>
+</div>
+<div class="actions">
+  <%= link_to 'Back', products_path, class: 'button'  %>
+  <%= link_to 'Edit', edit_product_path(@product), class: 'button button-primary'  %>
+</div>
