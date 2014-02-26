@@ -12,16 +12,17 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
+    <%#= f.label :title %>
+    <%= f.text_field :title, placeholder: 'Title'%>
   </div>
   <div class="field properties-editor" data-template="product[properties][__name__]">
-    <%= f.label :properties %>
+    <%#= f.label :properties %>
     <table>
       <thead>
         <tr>
           <th>Property</th>
           <th>Value</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -36,9 +37,11 @@
         <% end %>
       </tbody>
     </table>
-    <a href="#" class="add-property">New property</a>
+    <div class="actions">
+      <a href="#" class="add-property button">New property</a>
+    </div>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="actions form-action">
+    <%= f.submit  class: 'button button-primary' %>
   </div>
 <% end %>

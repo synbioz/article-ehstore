@@ -1,0 +1,88 @@
+$orange: #ff8500
+.button
+  display: inline-block
+  font-size: 1em
+  cursor: pointer
+  padding: 0.5em 1em
+  border: 1px solid #bbb
+  border-radius: 3px
+  background: #eee
+  color: #333
+  text-decoration: none
+  webkit-appearance: none
+  moz-appearance: none
+  outline: none
+  &:hover
+    background: #fff
+    color: #333
+  &:active
+    background: #ddd
+    color: #333
+.button-primary
+  background: $orange
+  color: #fff
+  border: 1px solid darken($orange,10)
+  text-shadow: 0 -1px 1px  darken($orange,10)
+  &:hover
+    color: #fff
+    background: lighten($orange,5)
+  &:active
+    color: #fff
+    background: darken($orange,5)
+
+
+//#################### form
+.new_product,
+.edit_product
+  margin: 0 0 2em
+  max-width: 600px
+  border-radius: 3px
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3)
+  .field
+    label
+      display: inline-block
+      width: 110px
+      float: left
+  .actions
+    text-align: right
+    clear: both
+  .form-action
+    padding: 1em
+    background: #eee
+    border-top: 1px solid #ddd
+#product_title
+  box-sizing: border-box
+  width: 400px
+  font-size: 1.2em
+  padding: 0.3em 0 0.3em 0.5em
+  border: 1px solid #ccc
+  border-radius: 0
+  margin: 10px
+.property input[type='text']
+  width: 100%
+  box-sizing: border-box
+  font-size: 1em
+  padding: 0.3em 0.5em
+  border: 1px solid #ccc
+.properties-editor 
+  margin: 10px
+  table
+    margin-bottom: 1em
+    border-collapse: collapse
+    width: 100%
+    th
+      background: #eee
+      color: #555
+      text-align: left
+      font-weight: normal
+      padding: 0.3em 0 0.3em 0.5em
+      &:nth-child(1)
+        min-width: 380px
+      &:nth-child(2)
+        width: 110px
+      &:nth-child(3)
+        width: 32px
+
+.add-property
+  font-size: 0.85em
+  margin: 0 1.5em 1em
