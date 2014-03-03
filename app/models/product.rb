@@ -60,8 +60,8 @@ class Product < ActiveRecord::Base
   private
 
     def filters
-      @query.each_with_object([]) do |(key, value), filters|
-        filters << { term: { "properties.#{key}" => value } }
+      @query.each_with_object([]) do |(key, values), filters|
+        filters << { terms: { "properties.#{key}" => values } }
       end
     end
   end

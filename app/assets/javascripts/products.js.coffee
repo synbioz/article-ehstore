@@ -71,7 +71,8 @@ $(document).on 'page:change', ->
           q = {}
           for facet in searchCollection.facets()
             for own key, val of facet
-              q[key] = val
+              q[key] ?= []
+              q[key].push(val)
 
           $.ajax
             type: 'GET'
