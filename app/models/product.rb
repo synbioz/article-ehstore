@@ -37,10 +37,8 @@ class Product < ActiveRecord::Base
         when Hash
           Product.search({
             size: 1000,
-            query: {
-              bool: {
-                must: queries
-              }
+            filter: {
+              and: filters
             }
           })
         else
@@ -61,9 +59,9 @@ class Product < ActiveRecord::Base
 
   private
 
-    def queries
-      @query.each_with_object([]) do |(key, value), search|
-        search << { match: { "properties.#{key}" => value } }
+    def filters
+      @query.each_with_object([]) do |(key, value), filters|
+        filters << { term: { "properties.#{key}" => value } }
       end
     end
   end
