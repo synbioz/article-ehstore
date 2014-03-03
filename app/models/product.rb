@@ -36,7 +36,7 @@ class Product < ActiveRecord::Base
       es_params = {
         size: 1000,
         filter: {
-          and: filters
+          and: @query.map{ |key, values| { terms: { "properties.#{key}" => values } } }
         }
       }
       Product.search(es_params).records
@@ -49,14 +49,6 @@ class Product < ActiveRecord::Base
           results = ActiveRecord::Base.connection.execute(query)
           results.each_with_object([]) { |rows, columns| columns << rows['k'] }
         end
-    end
-
-  private
-
-    def filters
-      @query.each_with_object([]) do |(key, values), filters|
-        filters << { terms: { "properties.#{key}" => values } }
-      end
     end
   end
 end
