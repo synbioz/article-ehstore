@@ -1,8 +1,8 @@
 common: &common
   host: localhost
-  # port: 5433
+  port: 5433
   adapter: postgresql
-  user: victor
+  user: ehstore
   password:
 
 development:

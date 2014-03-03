@@ -29,7 +29,7 @@ class Product < ActiveRecord::Base
         }
       }
       response = Product.search(es_params)
-      response.response["facets"][facet]["terms"].sort_by{ |f| f['count'] }.map{ |f| f['term']}
+      response.response["facets"][facet]["terms"].map{ |f| f['term']}
     end
 
     def search
