@@ -13,7 +13,7 @@ class Product < ActiveRecord::Base
       return [] unless property_keys.include?(facet)
 
       field = "properties.#{facet}"
-      response = Product.search({
+      es_params = {
         size: 0,
         query: {
           prefix: {
@@ -27,25 +27,19 @@ class Product < ActiveRecord::Base
             }
           }
         }
-      })
+      }
+      response = Product.search(es_params)
       response.response["facets"][facet]["terms"].sort_by{ |f| f['count'] }.map{ |f| f['term']}
     end
 
     def search
-      response =
-        case @query
-        when Hash
-          Product.search({
-            size: 1000,
-            filter: {
-              and: filters
-            }
-          })
-        else
-          Product.search(@query)
-        end
-
-      response.records
+      es_params = {
+        size: 1000,
+        filter: {
+          and: filters
+        }
+      }
+      Product.search(es_params).records
     end
 
     def property_keys
