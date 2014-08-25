@@ -1,6 +1,7 @@
 ## Installation
 
 Les instructions d'installation sont pour une machine basée sur Debian.
+Ne pas oublier de copier le ficher no_robots.txt à la place du robots.txt
 
 ### ElasticSearch
 
